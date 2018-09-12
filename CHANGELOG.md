@@ -1,19 +1,39 @@
 # CHANGELOG
 
-**`[2] Express Server`**
+**`[3] Express Static Files Configuration`**
 
 ## Steps
 
-- [X] Refactor code and implement `express.js`
+###### Static Files Configuration
 
-- [X] Implement an environment variable to take the PORT number
+- [X] Create `/public` folder
 
-- [X] Write a `npm script` to run the app
+- [X] Create `/css` folder inside `/public`
 
-- [X] Implement `morgan` to log every request in console
+- [X] Create `app.css` in `/public/css`
 
-- [X] Configure `nodemon` to watch our `app.js`file
+- [X] In **middlewares** section, configure `express.static`.
 
-- [X] Write the **404** and **500** handlers
+###### Views + Template Engine Configuration
 
-- [X] Implement another route to `/api/`
+- [X] Create `/src` folder
+
+- [X] Create a `/views` folder from `npm`
+
+- [X] Install `pug` package from `npm`
+
+- [X] Set the `views` variable for `Express.js`
+
+- [X] Configure `pug` as template engine
+
+- [X] Create `main.pug` file in `/views` folder
+
+- [X] Refactor `sendFile` function to render the file through `Express.js` views configuration
+
+- [X] Transfer code from `index.html` to `main.pug` with the correct syntax
+
+- [X] Send information through the template and print them in `main.pug`
+
+- [X] Reference the styles through our static configuration (`/static/css/app.css`)
+
+- [X] Delete `index.html` file

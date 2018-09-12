@@ -1,15 +1,20 @@
 //Import  the modules
 const express = require('express');
-const fs = require('fs');
-const chalk = require('chalk');
 const logger = require('morgan');
+const chalk = require('chalk');
 
 /** [0] Express class into app variable */
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-/* Absolute Path to HTML file */
-const indexFile = `${ __dirname }/index.html`;
+/**
+ * [X] Views Configuration
+ * 
+ * [X] Set the `views` variable and pass the relative path
+ * [X] Configure the template engine using `pug`
+ */
+app.set('views', './src/views');
+app.set('view engine', 'pug');
 
 /**
  * [X] Middlewares
@@ -19,6 +24,7 @@ const indexFile = `${ __dirname }/index.html`;
  * 
  */
  app.use(logger('dev'));
+ app.use('/static', express.static('public'));
 
  /**
   * [X] Routes
@@ -28,8 +34,15 @@ app.get('/api', (request, response) => {
     response.send('LinkedIn REST API').status(200);
 });
 
+/**
+ * [X] `app.get('/')` will render a '.pug' file located in `src/views/main.pug`
+ * [X] As a second param we are sending content using a JavaScript Object
+ */
 app.get('/', (request, response) => {
-    response.sendFile(indexFile);
+    response.render('main', {
+        title: 'LinkedIn REST API',
+        subtitle: 'API Reference'
+    });
 });
 
 /**
@@ -76,7 +89,7 @@ app.use((error, request, response, next) => {
   */
 
   app.listen(PORT, () => {
-      const formatedMessage = chalk.green(`Express server running on PORT: ${ PORT }`);
+      const formatedMessage = `Express server running on PORT: ${ PORT }`;
 
       console.log(formatedMessage);
   });
