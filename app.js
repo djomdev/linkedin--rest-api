@@ -3,6 +3,9 @@ const express = require('express');
 const logger = require('morgan');
 const chalk = require('chalk');
 
+/** Import all the routes configuration */
+const api = require('./src/routes/api');
+
 /** [0] Express class into app variable */
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,31 +15,26 @@ const PORT = process.env.PORT || 3000;
  * 
  * [X] Set the `views` variable and pass the relative path
  * [X] Configure the template engine using `pug`
+ * [X] Render visually properly JSON data in the browser
  */
 app.set('views', './src/views');
 app.set('view engine', 'pug');
+app.set('json spaces', 2);
 
 /**
  * [X] Middlewares
  * Runs before each request hit the routes configuration.
  * 
  * [X] Logs all requests
- * 
+ * [X] Define the static route to serve files from `/public`folder
  */
  app.use(logger('dev'));
  app.use('/static', express.static('public'));
 
  /**
   * [X] Routes
-  * 'app.use' it's called every time a request is sent to the server.
-  */
-app.get('/api', (request, response) => {
-    response.send('LinkedIn REST API').status(200);
-});
-
-/**
- * [X] `app.get('/')` will render a '.pug' file located in `src/views/main.pug`
- * [X] As a second param we are sending content using a JavaScript Object
+  * [X] `app.get('/')` will render a `.pug` file located in `src/views/main.pug`
+  * [X] As a second param we are sending content using a JavaScript Object
  */
 app.get('/', (request, response) => {
     response.render('main', {
@@ -44,6 +42,11 @@ app.get('/', (request, response) => {
         subtitle: 'API Reference'
     });
 });
+
+/**
+ * [X] Configure endpoints access through `/api` namespace
+ */
+app.use('/api/v1', api);
 
 /**
  * [X] 404 Not Found

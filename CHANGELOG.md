@@ -1,39 +1,41 @@
 # CHANGELOG
 
-**`[3] Express Static Files Configuration`**
+**`[4] Routes and Controllers Configuration`**
 
 ## Steps
 
-###### Static Files Configuration
+###### Routes Configuration
 
-- [X] Create `/public` folder
+- [X] Create `/src/routes` folder
 
-- [X] Create `/css` folder inside `/public`
+- [X] Create `/src/routes/api.js` file
 
-- [X] Create `app.css` in `/public/css`
+- [X] Import **`Router`** function from `express.js`
 
-- [X] In **middlewares** section, configure `express.static`.
+- [X] Initialize the `Router``
 
-###### Views + Template Engine Configuration
+- [X] Create a `get` endpoint that hits `/companies`
 
-- [X] Create `/src` folder
+- [X] Import the `api` router in `app.js`
 
-- [X] Create a `/views` folder from `npm`
+- [X] Configure router in `app.js`
 
-- [X] Install `pug` package from `npm`
+- [X] Import the JSON local file containing “companies” data
 
-- [X] Set the `views` variable for `Express.js`
+- [X] Render in `/companies` endpoint with the JSON data imported
 
-- [X] Configure `pug` as template engine
+- [X] Create a `get` endpoint that hits `/companies/:companyId`
 
-- [X] Create `main.pug` file in `/views` folder
+- [X] Create a fake search using `filter` method
 
-- [X] Refactor `sendFile` function to render the file through `Express.js` views configuration
+###### Controllers Configuration
 
-- [X] Transfer code from `index.html` to `main.pug` with the correct syntax
+- [X] Create `/src/controllers` folder
 
-- [X] Send information through the template and print them in `main.pug`
+- [X] Create `/src/controllers/Companies.js` file
 
-- [X] Reference the styles through our static configuration (`/static/css/app.css`)
+- [X] Move logic from routes configuration to _Companies Controller_
 
-- [X] Delete `index.html` file
+- [X] Import Companies controller in `routes/api.js`
+
+- [X] Call the correct methods in each endpoint
