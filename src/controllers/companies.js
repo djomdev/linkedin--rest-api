@@ -1,15 +1,38 @@
+/**
+ * Import Mongoose
+ */
+const ODM = require('mongoose');
+
 /** Import JSON data from local file */
 const companies = require('../../companies.json');
 
 /**
+ * Models
+ * [1] Companies
+ */
+const Company = require('../models/Companies');
+
+/**
  * Companies
- *      `index`
+ *     `index()`
+ *     `getById()`
+ *     `create()`
+ *     `update()`
+ *     `remove()`
  */
 const Controller = {
     index: (request, response) => {
-        response
-            .json(companies)
-            .status(200);
+        Company
+            .find()
+            .exec()
+            .then(companies => {
+                response
+                    .json({
+                        companies
+                    })
+                    .status(200);
+            })
+            .catch(error => console.log(error));
     },
     getById: (request, response) => {
         /**
@@ -24,6 +47,38 @@ const Controller = {
         response
             .json({
                 data: company
+            })
+            .status(200);
+    },
+    create: (request, response) => {
+        const newCompany = new Company({
+            _id: new ODM.Types.ObjectId(),
+            name: request.body.name
+        });
+
+        newCompany
+            .save()
+            .then(newRecord => {
+                response
+                    .json({
+                        type: 'POST Request',
+                        data: newRecord
+                    })
+                    .status(201);
+            })
+            .catch(error => console.log(error));
+    },
+    update: (request, response) => {
+        response
+            .json({
+                type: 'PUT Request'
+            })
+            .status(200);
+    },
+    remove: (request, response) => {
+        response
+            .json({
+                type: 'DELETE Request'
             })
             .status(200);
     }

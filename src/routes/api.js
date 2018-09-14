@@ -19,16 +19,23 @@ const app = Router();
  * 
  * [1] Companies
  */
-const Companies = require('../controllers/Companies');
+const Companies = require('../controllers/companies');
 
 /**
  * Endpoints
  * 
  * [1] Companies
  *      `get(/companies)`
- *      `get(/companies/:copmanyId)`
+ *      `post(/companies)`
+ *      `put(/companies)`
+ *       `delete(/companies)`
  */
-app.get('/companies', Companies.index);
+app.route('/companies')
+    .get(Companies.index)
+    .post(Companies.create)
+    .put(Companies.update)
+    .delete(Companies.remove);
+
 app.get('/companies/:companyId', Companies.getById);
 
 module.exports = app;
